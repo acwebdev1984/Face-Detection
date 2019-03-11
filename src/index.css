@@ -1,0 +1,17 @@
+body {
+	background: black;
+	background-image: cover;
+	margin: 0;
+  	padding: 0;
+  	font-family: "courier new";
+  
+}
+
+nav {
+	background-color: none;
+}
+
+button{
+cursor: pointer;
+
+}
