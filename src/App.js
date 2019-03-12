@@ -41,12 +41,33 @@ class App extends Component {
 
       input: '',
       imageUrl: '',
+      box: {},
 
     }
   }
 
+calculateFaceLocation = (data)=> {
+const clarifaiFace = response.output[0].data.regions[0].region_info.bounding_box
+// the above takes the response from the API and drills down to the data we want (bounding box)
+const image = document.getElementById('inputImage');
+// we grab the image (ID on face recog component)
+const width = Number(image.width);
+const height = Number(image.height);
+// we set width and height here, so that if a designer changes on the image in px, this function is calculating based on any width height
+return{
 
 
+  leftCol: clarifaiFace.left_col * width,
+  topRow: clarifaiFace.top_row * height,
+  rightCol: width - (clarifaiFace.right_col * width),
+  bottomRow: height - (clarifaiFace.bottom_row * height),
+
+  }
+
+}
+displayFaceBox = (box) => {
+  this.setState({box:box});
+}
 
 // below function for when the input is changed 
 // In this case, we set the state of the input field, to its current value (what is entered)
@@ -58,19 +79,15 @@ onInputChange = (event) => {
 // in the case we set the state of imgUrl to the value of input.
 onSubmit = () => {
  this.setState({imageUrl:this.state.input});
-  
+  }
 // code taken from the Clarifai API pages:
+// its takes the state of the input and then runs the calculateFaceLocation function with the reposne.
   app.models.predict(
     Clarifai.FACE_DETECT_MODEL,
     this.state.input)
-  .then(
-    function(response) {
-      console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
-    },
-    function(err) {
-      console.log("error");
-    }
-  );
+  .then(response => this.calculateFaceLocation(response))
+  .catch(err => console.log(err));  
+
 }
 
   render() {
