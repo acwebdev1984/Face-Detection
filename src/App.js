@@ -47,7 +47,7 @@ class App extends Component {
   }
 
 calculateFaceLocation = (data)=> {
-const clarifaiFace = response.output[0].data.regions[0].region_info.bounding_box
+const clarifaiFace = data.output[0].data.regions[0].region_info.bounding_box
 // the above takes the response from the API and drills down to the data we want (bounding box)
 const image = document.getElementById('inputImage');
 // we grab the image (ID on face recog component)
@@ -79,7 +79,7 @@ onInputChange = (event) => {
 // in the case we set the state of imgUrl to the value of input.
 onSubmit = () => {
  this.setState({imageUrl:this.state.input});
-  }
+  
 // code taken from the Clarifai API pages:
 // its takes the state of the input and then runs the calculateFaceLocation function with the reposne.
   app.models.predict(
