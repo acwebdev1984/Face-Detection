@@ -7,7 +7,7 @@ import  ImageLinkForm from './components/ImageLinkForm/ImageLinkForm.js'
 import  Rank from './components/Rank/Rank.js';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
-import signIn from './components/SignIn/SignIn.js';
+import SignIn from './components/SignIn/signIn.js';
 
 
 const app = new Clarifai.App({
@@ -102,8 +102,9 @@ onSubmit = () => {
        />
         
         <Navigation/>
-        <signIn/>
+        
         <Logo/>
+        <SignIn/>
         <Rank/>
         <ImageLinkForm
          onSubmit = {this.onSubmit} 
