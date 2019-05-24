@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const SignIn = ({onRouteChange}) => {
+const Register = ({onRouteChange}) => {
 	//
 	return(
   // this is a "article" is a card takem from Tachyons The Sign in form is also a Template from Tachyons
@@ -11,7 +11,12 @@ const SignIn = ({onRouteChange}) => {
 <main className="pa4 black-80">
   <form className="measure">
     <fieldset id="sign_up" className="ba b--black ph0 mh0">
-      <legend className="pa2 f4 fw6 ph0 mh0">Sign In</legend>
+      <legend className="pa2 f4 fw6 ph0 mh0">Register</legend>
+      <div className="mt3">
+        <label className="db fw6 lh-copy f6" for="email-address">Name</label>
+        <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="name"  id="name"/>
+      </div>
+
       <div className="mt3">
         <label className="db fw6 lh-copy f6" for="email-address">Email</label>
         <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address"/>
@@ -26,14 +31,12 @@ const SignIn = ({onRouteChange}) => {
       <input 
         className="b ph3 pv2 input-reset ba b--black bg-white grow pointer f6 dib ma3"
         //  arrow function allows the function to only run onClick
-        onClick ={ () => onRouteChange('home')}
+        onClick ={ () => onRouteChange('SignIn')}
         type="submit" 
-        value="Sign in"
+        value="Register"
         />
     </div>
-    <div className="lh-copy mt3">
-      <p onClick ={ () => onRouteChange('Register')} className="pointer f6 link dim black db">Register</p>
-     </div>
+    
   </form>
 </main>
 
@@ -41,4 +44,4 @@ const SignIn = ({onRouteChange}) => {
 			);
 }
 
-export default SignIn;
+export default Register;

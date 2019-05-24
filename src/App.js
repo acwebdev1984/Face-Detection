@@ -8,7 +8,7 @@ import  Rank from './components/Rank/Rank.js';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import SignIn from './components/SignIn/signIn.js';
-
+import Register from './components/Register/register.js';
 
 const app = new Clarifai.App({
  apiKey: 'dde753addb764a059ff1aca5655cb765'
@@ -113,20 +113,24 @@ onSubmit = () => {
        />
         
         <Navigation onRouteChange = {this.onRouteChange}/>
-
-        {this.state.route === 'SignIn'
+        {this.state.route === 'home'
+        ?
+          <div>
+            <Logo/>
+            <Rank/>
+            <ImageLinkForm
+              onSubmit = {this.onSubmit} 
+              onInputChange = {this.onInputChange}
+            />
+            <FaceRecognition box = {this.state.box} imageUrl = {this.state.imageUrl}/>
+          </div> 
+        : (
+        this.state.route === 'SignIn'
         
-        ? <SignIn onRouteChange = {this.onRouteChange}/>
-        : 
-      <div>
-        <Logo/>
-        <Rank/>
-        <ImageLinkForm
-          onSubmit = {this.onSubmit} 
-          onInputChange = {this.onInputChange}
-         />
-        <FaceRecognition box = {this.state.box} imageUrl = {this.state.imageUrl}/>
-       </div> 
+        ?         <SignIn onRouteChange = {this.onRouteChange}/>
+        :         <Register onRouteChange = {this.onRouteChange}/>
+
+            )
       }
       </div>
     );
