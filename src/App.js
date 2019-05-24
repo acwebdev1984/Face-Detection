@@ -43,9 +43,19 @@ class App extends Component {
       input: '',
       imageUrl: '',
       box: {},
+      route: 'SignIn',
 
     }
   }
+
+//  The route state is defined on the onClick functions with the nav & submit buttons
+onRouteChange = (route) => {
+
+this.setState({route:route});
+
+}
+
+
 
 calculateFaceLocation = (data)=> {
 const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box
@@ -93,7 +103,8 @@ onSubmit = () => {
   .catch(err => console.log(err));  
 
 }
-
+// this.state.route below: if route is signin is true (?) return signin form, else return all other componants
+// note : as you return mutiple elememts, you must wrap in a div.
   render() {
     return (
       <div className="App">
@@ -101,16 +112,22 @@ onSubmit = () => {
          params={particleOptions}
        />
         
-        <Navigation/>
+        <Navigation onRouteChange = {this.onRouteChange}/>
+
+        {this.state.route === 'SignIn'
         
+        ? <SignIn onRouteChange = {this.onRouteChange}/>
+        : 
+      <div>
         <Logo/>
-        <SignIn/>
         <Rank/>
         <ImageLinkForm
-         onSubmit = {this.onSubmit} 
-         onInputChange = {this.onInputChange}
+          onSubmit = {this.onSubmit} 
+          onInputChange = {this.onInputChange}
          />
         <FaceRecognition box = {this.state.box} imageUrl = {this.state.imageUrl}/>
+       </div> 
+      }
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const SignIn = () => {
+const SignIn = ({onRouteChange}) => {
 	//
 	return(
   // this is a "article" is a card takem from Tachyons The Sign in form is also a Template from Tachyons
@@ -23,7 +23,13 @@ const SignIn = () => {
       <label className="pa0 ma0 lh-copy f6 pointer"><input type="checkbox"/>Remember me</label>
     </fieldset>
     <div className="">
-      <input className="b ph3 pv2 input-reset ba b--black bg-white grow pointer f6 dib ma3" type="submit" value="Sign in"/>
+      <input 
+        className="b ph3 pv2 input-reset ba b--black bg-white grow pointer f6 dib ma3"
+        //  arrow function allows the function to only run onClick
+        onClick ={ () => onRouteChange('home')}
+        type="submit" 
+        value="Sign in"
+        />
     </div>
     <div className="lh-copy mt3">
       <a href="#0" className="f6 link dim black db">Register</a>
