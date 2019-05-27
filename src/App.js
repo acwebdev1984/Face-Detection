@@ -44,13 +44,18 @@ class App extends Component {
       imageUrl: '',
       box: {},
       route: 'SignIn',
+      isSignedIn: false,
 
     }
   }
 
 //  The route state is defined on the onClick functions with the nav & submit buttons
 onRouteChange = (route) => {
-
+if(route==='signout'){
+  this.setState({isSignedIn: false})
+}else if (route==='home'){
+  this.setState({isSignedIn:true})
+}
 this.setState({route:route});
 
 }
@@ -106,14 +111,16 @@ onSubmit = () => {
 // this.state.route below: if route is signin is true (?) return signin form, else return all other componants
 // note : as you return mutiple elememts, you must wrap in a div.
   render() {
+    // using destructing, to prevent repeat code of this.state = isSigned in, this.state = imageurl etc. We can now just use {isSignedIn} etc.
+    const {route, imageUrl,isSignedIn, box} = this.state;
     return (
       <div className="App">
       <Particles className = 'Particles'
          params={particleOptions}
        />
         
-        <Navigation onRouteChange = {this.onRouteChange}/>
-        {this.state.route === 'home'
+        <Navigation isSignedIn = {isSignedIn}  onRouteChange = {this.onRouteChange}/>
+        {route === 'home'
         ?
           <div>
             <Logo/>
@@ -122,7 +129,7 @@ onSubmit = () => {
               onSubmit = {this.onSubmit} 
               onInputChange = {this.onInputChange}
             />
-            <FaceRecognition box = {this.state.box} imageUrl = {this.state.imageUrl}/>
+            <FaceRecognition box = {box} imageUrl = {imageUrl}/>
           </div> 
         : (
         this.state.route === 'SignIn'
